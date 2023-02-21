@@ -1,11 +1,12 @@
-from tensorflow.keras.models import Model,load_model
+import tensorflow as tf
+from keras.models import Model,load_model
 from utils.semantic_segmentation_utils import SemanticSegmentationWrapper
 import numpy as np
 import onnxruntime as rt
 import time
 from utils.color_normalization import normalization_color_1 as normalization
-MODEL_PATH = '../color_classifiaction/models/2layers_dense_64_h.h5'
-ONNX_PATH = '../color_classifiaction/models/color_classifier.onnx'
+MODEL_PATH = 'models/2layers_dense_64_h.h5'
+ONNX_PATH = 'models/color_classifier.onnx'
 
 predefined_bins = np.arange(2, 254, 2)
 
@@ -114,7 +115,7 @@ if __name__=='__main__':
     import cv2
     import pandas as pd
     from os import path
-    from skimage import io, color
+    # from skimage import io, color
     import matplotlib.pyplot as plt
     from utils.semantic_segmentation_utils import SemanticSegmentationWrapper
     # fn = '/home/adi/workspace/RND/data/tagged_frames/Stark_HighRes_Level1_2_C/frame20.jpg'

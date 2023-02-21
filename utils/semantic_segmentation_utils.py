@@ -13,10 +13,13 @@ class SemanticSegmentationWrapper:
         local_mask_array = []
         for pos,local_mask in zip(original_position_in_rgb,masks):
             local_mask = local_mask[20:-20,20:-20]
+            local_mask = np.logical_or(local_mask == 1, local_mask == 3)
             local_mask_array.append(local_mask)
             mask = np.zeros((rgb.shape[0],rgb.shape[1]))
-            mask[pos[0][1]+20:pos[1][1]-20,pos[0][0]+20:pos[1][0]-20] = local_mask==1
+            mask[pos[0][1]+20:pos[1][1]-20,pos[0][0]+20:pos[1][0]-20] =  np.logical_or(local_mask ==1,local_mask ==3)
+
             mask_in_image.append(mask)
+
         return local_mask_array,mask_in_image
     def _post_process_masks(self, masks, circles, radius_scaling_in_batch, original_position_of_mask_in_rgb, scores):
         # mask is already in the relevant size of the rgb, however he is bigger than the bbox. the radios used before network was original_radios + self.radius_scaling_in_batch
