@@ -64,7 +64,7 @@ class ColorClassificaton:
         X = []
         for mask in mask_list:
 
-            normalized_crop = img_norm_uint[mask==1, :]
+            normalized_crop = img_norm_uint[mask, :]
             X.append(self.histogram_generator(normalized_crop))
         X = np.array(X)
         classification = self.classify(X)
