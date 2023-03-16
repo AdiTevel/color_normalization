@@ -1,6 +1,7 @@
 import cv2
 from color_class import ColorClassificaton
-img_file  = '/home/tevel/Downloads/Screenshot 2023-02-15 at 04-51-37 NORMA GALA XFC 21-22 v2.pdf.png'
+img_file  = '/home/tevel/workspace/data/color_classification/tagged_data/tagged_frames/Stark_HighRes_Level1_2_C/frame30.jpg'
+    #'/home/tevel/Downloads/Screenshot 2023-02-15 at 04-51-37 NORMA GALA XFC 21-22 v2.pdf.png'
 frame = cv2.imread(img_file)
 frame = cv2.resize(frame, (640, 480), interpolation=cv2.INTER_AREA)
 
