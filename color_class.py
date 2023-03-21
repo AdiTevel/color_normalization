@@ -7,7 +7,7 @@ import time
 from utils.color_normalization import normalization_color_1 as normalization
 MODEL_PATH = 'models/2layers_dense_64_h.h5'
 ONNX_PATH = 'models/color_classifier.onnx'
-
+FOREST_PATH =
 predefined_bins = np.arange(2, 254, 2)
 
 
@@ -22,6 +22,9 @@ class ColorClassificaton:
         if self.mode == 'tf':
             self.model =load_model(MODEL_PATH)
             self.classify = self.classify_tf
+        elif self.mode=='forest':
+
+
 
 
         elif self.mode == 'onnx':

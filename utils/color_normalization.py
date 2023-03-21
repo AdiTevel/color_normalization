@@ -2,8 +2,8 @@ import numpy as np
 import cv2
 
 def pre_normalization(im_in):
-    sat_indx = np.logical_and(im_in[:,:,0]==255,im_in[:,:,1]==255)
-    sat_indx = np.logical_and(sat_indx,im_in[:,:,2]==255)
+    sat_indx = np.logical_or(im_in[:,:,0]==255,im_in[:,:,1]==255)
+    sat_indx = np.logical_or(sat_indx,im_in[:,:,2]==255)
     N = np.sum(sat_indx)
     im_in[sat_indx,:] = 0
     # im_in = im_in.astype(float)
@@ -22,7 +22,8 @@ def average_cs(im_in,N):
     return im_out*N/3
 def normalization_color_1(im_in):
     number_iter =5
-    im_in,N_fault = pre_normalization(im_in)
+    # im_in,N_fault = pre_normalization(im_in)
+    N_fault=0
     N = im_in.shape[0]*im_in.shape[1]- N_fault
     for i in range(number_iter):
         im_in = average_pixel(im_in)
@@ -38,7 +39,8 @@ def normalization_color_2(img):
     return im_out
 
 if __name__=='__main__':
-    img_file = '/home/tevel/workspace/data/color_classification/tagged_data/tagged_frames/Stark_LowRes_Level2_C/frame100.jpg'
+    # img_file = '/home/tevel/workspace/data/color_classification/tagged_data/tagged_frames/Stark_LowRes_Level2_C/frame100.jpg'
+    img_file ='/home/adi/workspace/RND/data/tagged_frames/Stark_HighRes_Level1_C/frame30.jpg'
     frame = cv2.imread(img_file)
     frame = cv2.cvtColor(frame,cv2.COLOR_RGB2BGR)
     frame_norm1 = normalization_color_1(frame)
